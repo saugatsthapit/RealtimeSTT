@@ -15,10 +15,18 @@ if __name__ == '__main__':
     import numpy as np
     import wavio
     import keyboard
+    
+    import os
+
+    print("Checking environment variables:")
+    print(f"AZURE_SPEECH_KEY: {'Set' if os.environ.get('AZURE_SPEECH_KEY') else 'Not set'}")
+    print(f"AZURE_SPEECH_REGION: {'Set' if os.environ.get('AZURE_SPEECH_REGION') else 'Not set'}")
+    print(f"OPENAI_API_KEY: {'Set' if os.environ.get('OPENAI_API_KEY') else 'Not set'}")
+    print(f"ELEVENLABS_API_KEY: {'Set' if os.environ.get('ELEVENLABS_API_KEY') else 'Not set'}")
 
     max_history_messages = 6
     return_to_wakewords_after_silence = 12
-    start_with_wakeword = False
+    start_with_wakeword = True
     start_engine = "Azure" # Azure, Elevenlabs
     recorder_model = "large-v2"
     language = "en"
@@ -187,8 +195,8 @@ if __name__ == '__main__':
             self.recorder = AudioToTextRecorder(
                 model=recorder_model,
                 language=language,
-                wake_words="Jarvis",
-                silero_use_onnx=False,
+                wake_words="",
+                #silero_use_onnx=False,
                 spinner=True,
                 silero_sensitivity=0.2,
                 webrtc_sensitivity=3,
